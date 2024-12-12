@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>es.santander.ascender</groupId>
-  <artifactId>proyectoFinalGrupo</artifactId>
+  <artifactId>proyectoGrupoFinal</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>proyectoFinalGrupo</name>
+  <name>proyectoGrupoFinal</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
