@@ -20,21 +20,37 @@
             <h1 class="mb-4">Adivina el número aleatorio entre 1 y 100</h1>
         </header>
 
-        <div class="">
-            <form id="formularioNumero">
-                <div class="mb-3">
-                    <label for="numero" class="form-label">Número a adivinar:</label>
-                    <input type="number" class="form-control" name="numero" id="numero" max="100" min="1" required>
-                    <div class="form-text">Introduce un número entre 1 y 100.</div>
-                </div>
-                <button class="btn btn-primary botonComprobar w-100">Comprobar</button>
+        <div class="row">
+            <div class="col-md-6">
+                <form id="formularioNumero">
+                    <div class="mb-3">
+                        <label for="numero" class="form-label">Número a adivinar:</label>
+                        <input type="number" class="form-control" name="numero" id="numero" max="100" min="1" required>
+                        <div class="form-text">Introduce un número entre 1 y 100.</div>
+                    </div>
+                <button type="btn btn-primary botonComprobar w-100">Comprobar</button>
             </form>
-        </div>
-
-        <div class="intentos mt-5">
+            <div class="intentos mt-5">
             <p>Llevas <span class="numeroDeIntentos"> Numero a cambiar por variable</span> intentos</p>
         </div>
     </div>
+
+    <div class="col-md-6">
+        <h3>Ranking de Jugadores</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="Jugado"></th>
+                    <th scope="Intentos"></th>
+                </tr>
+            </thead>
+            <tbody id="ranking">
+            </tbody>
+        </table>
+      </div>
+            
+    </div>
+  </div>
 </body>
 
 </html>
