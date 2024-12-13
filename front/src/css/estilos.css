@@ -1,14 +1,13 @@
-header {
-    text-align: center;
-    margin-top: 20px;
-}
-/* Intentos*/
-
-.intentos{
-    text-align: center;
-    font-size: 2em;
+/* CSS para los colores de fondo */
+/* Estilos para los colores de fondo */
+.ranking-primero {
+    background-color: gold !important;
 }
 
-span.numeroDeIntentos {
-    color: firebrick;
+.ranking-segundo {
+    background-color: silver;
+}
+
+.ranking-tercero {
+    background-color: #cd7f32; /* Bronce */
 }

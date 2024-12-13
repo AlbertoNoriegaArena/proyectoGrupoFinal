@@ -11,7 +11,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/estilos.css">
     <script src="../node_modules/jquery/dist/jquery.js"></script>
-    <script src="javascript/index.js"></script>
 </head>
 
 <body>
@@ -28,7 +27,7 @@
                         <input type="number" class="form-control" name="numero" id="numero" max="100" min="1" required>
                         <div class="form-text">Introduce un número entre 1 y 100.</div>
                     </div>
-                <button type="btn btn-primary botonComprobar w-100">Comprobar</button>
+                <button type="submit" class="btn btn-primary botonComprobar w-100">Comprobar</button>
             </form>
             <div class="intentos mt-5">
             <p>Llevas <span class="numeroDeIntentos"> Numero a cambiar por variable</span> intentos</p>
@@ -40,8 +39,8 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="Jugado"></th>
-                    <th scope="Intentos"></th>
+                    <th scope="col">Jugador</th>
+                    <th scope="col">Intentos</th>
                 </tr>
             </thead>
             <tbody id="ranking">
@@ -51,6 +50,8 @@
             
     </div>
   </div>
+
+  <script src="javascript/index.js"></script>
 </body>
 
 </html>
