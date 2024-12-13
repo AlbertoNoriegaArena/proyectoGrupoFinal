@@ -1,13 +1,13 @@
 /* CSS para los colores de fondo */
 /* Estilos para los colores de fondo */
-.ranking-primero {
+.fila-primero {
     background-color: gold !important;
 }
 
-.ranking-segundo {
-    background-color: silver;
+.fila-segundo {
+    background-color: silver !important;
 }
 
-.ranking-tercero {
-    background-color: #cd7f32; /* Bronce */
+.fila-tercero {
+    background-color: #cd7f32 !important; /* Bronce */
 }

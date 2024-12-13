@@ -9,37 +9,47 @@ let ranking = [
 
 // Función para mostrar el ranking en la tabla
 function mostrarRanking(ranking) {
-    const rankingTable = document.getElementById("ranking");
-    rankingTable.innerHTML = '';  // Limpiar la tabla antes de agregar las nuevas filas
+    const rankingTable = document.getElementById("ranking"); // Obtener el tbody de la tabla
+    rankingTable.innerHTML = '';  // Limpiar la tabla antes de agregar nuevas filas
 
     // Ordenar las solicitudes por intentos (de menor a mayor)
     ranking.sort((a, b) => a.intentos - b.intentos);
 
-    // Agregar el ranking a la tabla
+    // Agregar las filas al cuerpo de la tabla
     ranking.forEach((entry, index) => {
         const row = document.createElement('tr');  // Crear una nueva fila
-        row.innerHTML = `
-            <td>${entry.jugador}</td>
-            <td>${entry.intentos}</td>
-        `;
-        console.log(`Jugador: ${entry.jugador}, Intentos: ${entry.intentos}, Índice: ${index}`);
         
-        // Aplicar clases para los tres primeros jugadores con los colores y tamaños de fondo
+        // Crear las celdas para cada jugador e intento
+        const tdJugador = document.createElement('td');
+        tdJugador.textContent = entry.jugador;
+        
+        const tdIntentos = document.createElement('td');
+        tdIntentos.textContent = entry.intentos;
+
+        // Asignar clases a las celdas según el ranking
         if (index === 0) {
-            row.classList.add('ranking-primero');  // Fondo dorado para el primero
+            tdJugador.classList.add('fila-primero');  // Dorado para el primero
+            tdIntentos.classList.add('fila-primero');
         } else if (index === 1) {
-            row.classList.add('ranking-segundo');  // Fondo plateado para el segundo
+            tdJugador.classList.add('fila-segundo');  // Plateado para el segundo
+            tdIntentos.classList.add('fila-segundo');
         } else if (index === 2) {
-            row.classList.add('ranking-tercero');  // Fondo bronce para el tercero
+            tdJugador.classList.add('fila-tercero');  // Bronce para el tercero
+            tdIntentos.classList.add('fila-tercero');
         }
 
-        rankingTable.appendChild(row);  // Añadir la fila a la tabla
+        // Añadir las celdas a la fila
+        row.appendChild(tdJugador);
+        row.appendChild(tdIntentos);
+
+        // Añadir la fila al tbody
+        rankingTable.appendChild(row);
     });
 }
 
 // Mostrar el ranking al cargar la página
 window.onload = function() {
-    mostrarRanking(ranking);  // Mostrar el ranking directamente
+    mostrarRanking(ranking);  // Mostrar el ranking ordenado
 };
 
 // Evento para el formulario (cuando el jugador adivine el número)
