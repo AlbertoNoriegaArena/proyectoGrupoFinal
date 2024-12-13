@@ -37,7 +37,6 @@ public class Partida {
                 System.out.print("Introduce tu nombre para guardar tu puntuación: ");
 
                 do {
-                    scanner.nextLine(); // Consumir el salto de línea pendiente
                     nombre = scanner.nextLine();
             
                     if (nombre.length() == 0) {
