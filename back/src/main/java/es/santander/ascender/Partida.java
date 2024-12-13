@@ -15,7 +15,7 @@ public class Partida {
     }
 
     public Jugador jugar() {
-        generarNumeroSecreto();
+       
         Scanner scanner = new Scanner(System.in);
         System.out.println("¡Adivina el número entre 0 y 100!");
 
