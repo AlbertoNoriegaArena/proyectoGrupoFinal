@@ -1,11 +1,11 @@
 package es.santander.ascender;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestorFichero {
-    private String rutaFichero = "src/main/java/es/santander/ascender/jugadores.txt";
-
+    private String rutaFichero;
 
     public GestorFichero(String rutaFichero) {
         this.rutaFichero = rutaFichero;
@@ -36,17 +36,5 @@ public class GestorFichero {
             System.err.println("Error al cargar jugadores: " + e.getMessage());
         }
         return jugadores;
-    }
-
-    // Ordenar jugadores por número de intentos
-    public void mostrarRanking() {
-        List<Jugador> jugadores = cargarJugadores();
-        jugadores.sort(Comparator.comparingInt(Jugador::getNumeroDeIntentos));
-
-        System.out.println("Ranking de jugadores:");
-        for (int i = 0; i < jugadores.size(); i++) {
-            Jugador jugador = jugadores.get(i);
-            System.out.println((i + 1) + ". " + jugador.getNombre() + " - " + jugador.getNumeroDeIntentos() + " intentos");
-        }
     }
 }
