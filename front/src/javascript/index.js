@@ -28,6 +28,7 @@ function mostrarRanking(ranking) {
 
         // Asignar clases a las celdas según el ranking
         if (index === 0) {
+            tdJugador.innerHTML = '<span class"icono"> <i class="fas fa-trophy" style="font-size: 25px;" ></i> </span>' + entry.jugador;
             tdJugador.classList.add('fila-primero');  // Dorado para el primero
             tdIntentos.classList.add('fila-primero');
         } else if (index === 1) {
