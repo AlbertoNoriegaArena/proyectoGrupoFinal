@@ -16,7 +16,7 @@ public class Partida {
 
     public List<Jugador> jugar() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("¡Introduce el número de jugadores!");
+        System.out.println("¡Introduce el número de jugadores! Mínimo 1 y máximo de 5");
         int numeroDeJugadores = 0;
     
         // Validaciones número de jugadores
@@ -27,6 +27,8 @@ public class Partida {
                 // Comprobamos que el número de jugadores sea mayor que 0
                 if (numeroDeJugadores <= 0) {
                     System.out.println("Debe haber al menos un jugador. Inténtalo de nuevo.");
+                } else if (numeroDeJugadores > 5) {
+                    System.out.println("No se permiten más de 5 jugadores. Inténtalo de nuevo.");
                 } else {
                     break;
                 }

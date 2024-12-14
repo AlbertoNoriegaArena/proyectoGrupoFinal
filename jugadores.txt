@@ -18,3 +18,5 @@ uuuuu,5
 iiiii,4
 mmmmmm,4
 ddddd,5
+NunchyPruebaMultijugador,7
+PepitaPruebaMultijugador,11
