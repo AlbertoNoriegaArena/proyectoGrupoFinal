@@ -1,0 +1,5 @@
+Luis,3
+Juan,5
+Pepita,1
+Ana,8
+Juliana,2

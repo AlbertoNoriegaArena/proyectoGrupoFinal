@@ -24,13 +24,14 @@ public class App {
 
         // Guardar TODOS los jugadores en el archivo
         FicheroTodosLosJugadores.guardarJugadores(jugadores);
+        
+         // Cargar jugadores desde el fichero y actualizar la lista
+         listaJugadores.cargarJugadoresDesdeFichero(FicheroTodosLosJugadores);
 
         // Guardar el Top 5 de jugadores en un archivo
         Ficherotop5jugadores.guardarTop5(listaJugadores.obtenerTop5());
 
-        // Cargar jugadores desde el fichero y actualizar la lista
-        listaJugadores.cargarJugadoresDesdeFichero(FicheroTodosLosJugadores);
-
+        
         // Mostrar todos los jugadores
         System.out.println("Lista de todos los jugadores:");
         listaJugadores.mostrarJugadores();

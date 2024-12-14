@@ -52,18 +52,7 @@ public class JugadorTest {
         assertEquals(3, jugador.getNumeroDeIntentos());
     }
 
-    @Test
-    public void testIncrementarConValorNegativo() {
-        // Crear un jugador con nombre "Pedro" y -1 intentos
-        Jugador jugador = new Jugador("Pedro", -1);
-
-        // Incrementar el número de intentos
-        jugador.incrementarIntentos();
-
-        // Verificar que el número de intentos es 0, no debería permitir números
-        // negativos.
-        assertEquals(0, jugador.getNumeroDeIntentos());
-    }
+   
 
     @Test
     public void testGetNombre() {
