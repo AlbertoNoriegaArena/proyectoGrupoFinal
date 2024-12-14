@@ -19,6 +19,7 @@ public class GestorFichero {
 
     // Guardar la lista completa de jugadores 
     public void guardarJugadores(List<Jugador> jugadores) {
+        //ponemos true para añadir
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaFichero, true))) {
             for (Jugador jugador : jugadores) {
                 // Guardar el nombre y los intentos del jugador, separados por coma
@@ -32,7 +33,8 @@ public class GestorFichero {
 
     // Método para guardar el Top 5 de jugadores en un archivo
     public void guardarTop5(List<Jugador> top5) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaFichero))) {  
+        //ponemos false para que sobreescriba
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaFichero,false))) {  
             // Iterar a través de la lista de jugadores Top 5
             for (Jugador jugador : top5) {
                 // Escribir el nombre del jugador y el número de intentos separados por una coma
