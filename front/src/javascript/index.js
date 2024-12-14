@@ -3,7 +3,7 @@ let ranking = [
     { "jugador": "Juan", "intentos": 5 },
     { "jugador": "Ana", "intentos": 3 },
     { "jugador": "Carlos", "intentos": 7 },
-    { "jugador": "Rodri", "intentos": 1 },
+    { "jugador": "Rodri", "intentos": 2 },
     { "jugador": "Balto", "intentos": 8 }
 ];
 
@@ -15,20 +15,23 @@ function mostrarRanking(ranking) {
     // Ordenar las solicitudes por intentos (de menor a mayor)
     ranking.sort((a, b) => a.intentos - b.intentos);
 
+    // Tomar solo los primeros 5 jugadores con menos intentos
+    const top5Ranking = ranking.slice(0, 5);
+
     // Agregar las filas al cuerpo de la tabla
-    ranking.forEach((entry, index) => {
+    top5Ranking.forEach((entry, index) => {
         const row = document.createElement('tr');  // Crear una nueva fila
-        
+
         // Crear las celdas para cada jugador e intento
         const tdJugador = document.createElement('td');
         tdJugador.textContent = entry.jugador;
-        
+
         const tdIntentos = document.createElement('td');
         tdIntentos.textContent = entry.intentos;
 
         // Asignar clases a las celdas según el ranking
         if (index === 0) {
-            tdJugador.innerHTML = '<span class"icono"> <i class="fas fa-trophy" style="font-size: 25px;" ></i> </span>' + entry.jugador;
+            tdJugador.innerHTML = '<span class="icono"> <i class="fas fa-trophy" style="font-size: 25px;" ></i> </span>' + entry.jugador;
             tdJugador.classList.add('fila-primero');  // Dorado para el primero
             tdIntentos.classList.add('fila-primero');
         } else if (index === 1) {
@@ -49,45 +52,65 @@ function mostrarRanking(ranking) {
 }
 
 // Mostrar el ranking al cargar la página
-window.onload = function() {
+window.onload = function () {
     mostrarRanking(ranking);  // Mostrar el ranking ordenado
 };
 
-// Evento para el formulario (cuando el jugador adivine el número)
-const formulario = document.getElementById("formularioNumero");
-formulario.addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita que el formulario se envíe y recargue la página
+$(document).ready(function () {
+    let numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+    let intentos = 0;  // Contador de intentos
+    let numerosIntentados = []; // Array para almacenar los números intentados
 
-    // Obtener el valor del número ingresado
-    const numeroIngresado = parseInt(document.getElementById("numero").value);
+    // Evento al enviar el formulario
+    $("#formularioNumero").submit(function (event) {
+        event.preventDefault();  // Evitar el envío del formulario
 
-    // Definir un número aleatorio entre 1 y 100
-    const numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+        // Obtener el número ingresado por el usuario y asegurarnos de que sea un número
+        let numeroIngresado = parseInt($("#numero").val());
 
-    // Variable para contar los intentos
-    let intentos = 0;
-    intentos++;
+        // Aumentar el contador de intentos
+        intentos++;
 
-    // Mostrar el número de intentos en la pantalla
-    document.querySelector(".numeroDeIntentos").textContent = intentos;
+        // Mostrar el número de intentos en el span
+        $(".numeroDeIntentos").text(intentos);
 
-    // Comprobar si el número ingresado es correcto
-    if (numeroIngresado === numeroAleatorio) {
-        alert(`¡Felicidades! Has adivinado el número ${numeroAleatorio} en ${intentos} intentos.`);
+        // Mostrar los números intentados en el div .intentos
+        numerosIntentados.push(numeroIngresado);
+        let intentosTexto = "Números intentados: " + numerosIntentados.join(", ");
+        $(".intentos p.numerosProbados").text(intentosTexto);
 
-        // Agregar al ranking
-        const jugador = prompt("Introduce tu nombre:");
-        ranking.push({ jugador: jugador, intentos: intentos });
+        // Verificar si el número ingresado es correcto
+        if (numeroIngresado === numeroAleatorio) {
+            // Mostrar el formulario para ingresar el nombre
+            $("#FormularioNombreJugador").show();
 
-        // Mostrar el ranking actualizado
-        mostrarRanking(ranking);
+        } else if (numeroIngresado < numeroAleatorio) {
+            alert("El número que buscas es mayor que " + numeroIngresado);
+            $("#numero").val(''); // Limpiar el campo de entrada
+        } else {
+            alert("El número que buscas es menor que " + numeroIngresado);
+            $("#numero").val(''); // Limpiar el campo de entrada
+        }
+    });
 
-        // Resetear el contador de intentos
-        intentos = 0;
-        document.querySelector(".numeroDeIntentos").textContent = intentos;
-    } else if (numeroIngresado < numeroAleatorio) {
-        alert("El número ingresado es menor. Intenta nuevamente.");
-    } else {
-        alert("El número ingresado es mayor. Intenta nuevamente.");
-    }
+    // Al hacer clic en "Guardar en Ranking"
+    $("#guardarRanking").click(function () {
+        const nombre = $("#nombreJugador").val();
+        if (nombre) {
+            ranking.push({ "jugador": nombre, "intentos": intentos });
+            mostrarRanking(ranking);
+            // Limpiar el campo de nombre y ocultar el formulario
+            $("#FormularioNombreJugador").hide();
+            $("#nombreJugador").val(''); // Limpiar el campo de entrada del nombre
+
+            // Reiniciar el juego (número aleatorio y contador de intentos)
+            numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+            intentos = 0;
+            $(".numeroDeIntentos").text(intentos);
+            $("#numero").val(''); // Limpiar el campo de entrada
+            $(".intentos p.numerosProbados").text('');
+        } else {
+            alert("Por favor, ingresa tu nombre.");
+        }
+    });
 });

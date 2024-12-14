@@ -26,31 +26,39 @@
                         <input type="number" class="form-control" name="numero" id="numero" max="100" min="1" required>
                         <div class="form-text">Introduce un número entre 1 y 100.</div>
                     </div>
-                <button type="submit" class="btn btn-primary botonComprobar w-100">Comprobar</button>
-            </form>
-            <div class="intentos mt-5">
-            <p>Llevas <span class="numeroDeIntentos"> Numero a cambiar por variable</span> intentos</p>
+                    <button type="submit" class="btn btn-primary botonComprobar w-100">Comprobar</button>
+                </form>
+                <div class="intentos mt-5">
+                    <p>Llevas <span class="numeroDeIntentos">0</span> intentos</p>
+                    <p class="numerosProbados"></p>
+                </div>
+            </div>
+            <div class="col-md-2">
+            </div>
+
+            <div class="col-md-4" id="contenidoRanking">
+                <h3>Ranking de Jugadores</h3>
+                <table class="tablaRanking">
+                    <thead>
+                        <tr>
+                            <th scope="col">Jugador</th>
+                            <th scope="col">Intentos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ranking">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="col-md-2">
-    </div>
 
-    <div class="col-md-4" id="contenidoRanking">
-        <h3>Ranking de Jugadores</h3>
-        <table class="tablaRanking">
-            <thead>
-                <tr>
-                    <th scope="col">Jugador</th>
-                    <th scope="col">Intentos</th>
-                </tr>
-            </thead>
-            <tbody id="ranking">
-            </tbody>
-        </table>
-      </div>
-            
-    </div>
-  </div>
+     <!-- Formulario para ingresar el nombre cuando el jugador adivina el número -->
+     <div id="FormularioNombreJugador" class="mt-4 mx-3" style="display: none;" >
+        <h1 style="text-align: center;" class="my-4">¡Enhorabuena! Has acertado el número</h1>
+        <h4>Ingresa tu nombre:</h4>
+        <input type="text" id="nombreJugador" class="form-control" placeholder="Escribe tu nombre">
+        <button id="guardarRanking" class="btn btn-primary mt-2">Guardar</button>
+    </div>    
 
 </body>
 
