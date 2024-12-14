@@ -21,6 +21,11 @@ public class ListarJugadores {
         this.jugadores.add(jugador);
     }
 
+     // Guardar todos los jugadores en el fichero
+     public void guardarJugadoresEnFichero(GestorFichero gestorFichero) {
+        gestorFichero.guardarJugadores(this.jugadores);
+    }
+
     // Obtener el ranking de jugadores ordenado por número de intentos (de menor a mayor)
     public List<Jugador> obtenerRanking() {
         return jugadores.stream()
@@ -28,7 +33,7 @@ public class ListarJugadores {
                 .collect(Collectors.toList());
     }
 
-    // Obtener los 5 mejores jugadores (menos intentos)
+    // Obtener los 5 mejores jugadores (los que tienen menos intentos ordenados)
     public List<Jugador> obtenerTop5() {
         return obtenerRanking().stream()
                 .limit(5)

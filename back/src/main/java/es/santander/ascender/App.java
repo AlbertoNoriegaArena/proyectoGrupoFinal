@@ -1,25 +1,35 @@
 package es.santander.ascender;
 
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
-        // Crear una instancia de GestorFichero
-        GestorFichero gestorFichero = new GestorFichero("jugadores.txt");
+        // Crear una instancia de GestorFichero para jugadores y Top 5
+        GestorFichero FicheroTodosLosJugadores = new GestorFichero("jugadores.txt");
+        GestorFichero Ficherotop5jugadores = new GestorFichero("top5jugadores.txt");
 
         // Crear una instancia de ListaJugadores
         ListarJugadores listaJugadores = new ListarJugadores();
 
-        // Crear un jugador (por ejemplo, obteniéndolo de una partida)
+        // Crear partida
         Partida partida = new Partida();
-        Jugador jugador = partida.jugar();  // Suponiendo que esta línea te da un jugador
 
-        // Agregar el jugador a la lista de jugadores
-        listaJugadores.agregarJugador(jugador);
+        // Crear lista de jugadores
+        List<Jugador> jugadores = partida.jugar();
 
-        // Guardar el jugador en el archivo
-        gestorFichero.guardarJugador(jugador);
-        
+        // Bucle para agregar cada jugador a la lista de jugadores
+        for (Jugador jugador : jugadores) {
+            listaJugadores.agregarJugador(jugador); // Agregar a la lista de jugadores
+        }
+
+        // Guardar TODOS los jugadores en el archivo
+        FicheroTodosLosJugadores.guardarJugadores(jugadores);
+
+        // Guardar el Top 5 de jugadores en un archivo
+        Ficherotop5jugadores.guardarTop5(listaJugadores.obtenerTop5());
+
         // Cargar jugadores desde el fichero y actualizar la lista
-        listaJugadores.cargarJugadoresDesdeFichero(gestorFichero);
+        listaJugadores.cargarJugadoresDesdeFichero(FicheroTodosLosJugadores);
 
         // Mostrar todos los jugadores
         System.out.println("Lista de todos los jugadores:");
