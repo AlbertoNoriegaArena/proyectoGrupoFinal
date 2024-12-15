@@ -1,63 +1,71 @@
-// Datos de ejemplo para el ranking
-let ranking = [
-    { "jugador": "Juan", "intentos": 5 },
-    { "jugador": "Ana", "intentos": 3 },
-    { "jugador": "Carlos", "intentos": 7 },
-    { "jugador": "Rodri", "intentos": 2 },
-    { "jugador": "Balto", "intentos": 8 }
-];
-
-// Función para mostrar el ranking en la tabla
-function mostrarRanking(ranking) {
-    const rankingTable = document.getElementById("ranking"); // Obtener el tbody de la tabla
-    rankingTable.innerHTML = '';  // Limpiar la tabla antes de agregar nuevas filas
-
-    // Ordenar las solicitudes por intentos (de menor a mayor)
-    ranking.sort((a, b) => a.intentos - b.intentos);
-
-    // Tomar solo los primeros 5 jugadores con menos intentos
-    const top5Ranking = ranking.slice(0, 5);
-
-    // Agregar las filas al cuerpo de la tabla
-    top5Ranking.forEach((entry, index) => {
-        const row = document.createElement('tr');  // Crear una nueva fila
-
-        // Crear las celdas para cada jugador e intento
-        const tdJugador = document.createElement('td');
-        tdJugador.textContent = entry.jugador;
-
-        const tdIntentos = document.createElement('td');
-        tdIntentos.textContent = entry.intentos;
-
-        // Asignar clases a las celdas según el ranking
-        if (index === 0) {
-            tdJugador.innerHTML = '<span class="icono"> <i class="fas fa-trophy" style="font-size: 25px;" ></i> </span>' + entry.jugador;
-            tdJugador.classList.add('fila-primero');  // Dorado para el primero
-            tdIntentos.classList.add('fila-primero');
-        } else if (index === 1) {
-            tdJugador.classList.add('fila-segundo');  // Plateado para el segundo
-            tdIntentos.classList.add('fila-segundo');
-        } else if (index === 2) {
-            tdJugador.classList.add('fila-tercero');  // Bronce para el tercero
-            tdIntentos.classList.add('fila-tercero');
-        }
-
-        // Añadir las celdas a la fila
-        row.appendChild(tdJugador);
-        row.appendChild(tdIntentos);
-
-        // Añadir la fila al tbody
-        rankingTable.appendChild(row);
-    });
-}
-
-// Mostrar el ranking al cargar la página
-window.onload = function () {
-    mostrarRanking(ranking);  // Mostrar el ranking ordenado
-};
-
 $(document).ready(function () {
-    let numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+
+    let ranking = []; // Inicializar el ranking como un array vacío
+
+    // Función para cargar los datos 
+    function cargarRanking() {
+        $.ajax({
+            url: 'https://my-json-server.typicode.com/AlbertoNoriegaArena/proyectoGrupoFinal/solicitudes',
+            method: 'GET',
+            success: function (data) {
+                ranking = data; 
+                mostrarRanking(ranking); 
+            },
+            error: function (error) {
+                console.error('Error al obtener los datos:', error);
+                alert('No se pudo obtener los datos. Inténtalo de nuevo.');
+            }
+        });
+    }
+
+    // Cargar el ranking al iniciar la página
+    cargarRanking();
+
+    // Función para mostrar el ranking en la tabla
+    function mostrarRanking(ranking) {
+        const rankingTable = document.getElementById("ranking"); // Obtener el tbody de la tabla
+        rankingTable.innerHTML = '';  // Limpiar la tabla antes de agregar nuevas filas
+
+        // Ordenar las solicitudes por intentos (de menor a mayor)
+        ranking.sort((a, b) => a.intentos - b.intentos);
+
+        // Obtener solo los primeros 5 jugadores con menos intentos
+        const top5Ranking = ranking.slice(0, 5);
+
+        // Agregar las filas al cuerpo de la tabla
+        top5Ranking.forEach((entry, index) => {
+            const row = document.createElement('tr');  // Crear una nueva fila
+
+            // Crear las celdas para cada jugador e intento
+            const tdJugador = document.createElement('td');
+            tdJugador.textContent = entry.jugador;
+
+            const tdIntentos = document.createElement('td');
+            tdIntentos.textContent = entry.intentos;
+
+            // Asignar clases a las celdas según el ranking
+            if (index === 0) {
+                tdJugador.innerHTML = '<span class="icono"> <i class="fas fa-trophy" style="font-size: 25px;" ></i> </span>' + entry.jugador;
+                tdJugador.classList.add('fila-primero');  // Dorado para el primero
+                tdIntentos.classList.add('fila-primero');
+            } else if (index === 1) {
+                tdJugador.classList.add('fila-segundo');  // Plateado para el segundo
+                tdIntentos.classList.add('fila-segundo');
+            } else if (index === 2) {
+                tdJugador.classList.add('fila-tercero');  // Bronce para el tercero
+                tdIntentos.classList.add('fila-tercero');
+            }
+
+            // Añadir las celdas a la fila
+            row.appendChild(tdJugador);
+            row.appendChild(tdIntentos);
+
+            // Añadir la fila al tbody
+            rankingTable.appendChild(row);
+        });
+    }
+
+    let numeroAleatorio = Math.floor(Math.random() * 101) + 1;
     let intentos = 0;  // Contador de intentos
     let numerosIntentados = []; // Array para almacenar los números intentados
 
@@ -65,10 +73,9 @@ $(document).ready(function () {
     $("#formularioNumero").submit(function (event) {
         event.preventDefault();  // Evitar el envío del formulario
 
-        // Obtener el número ingresado por el usuario y asegurarnos de que sea un número
+        // Obtener el número introducido por el usuario 
         let numeroIngresado = parseInt($("#numero").val());
-
-        // Aumentar el contador de intentos
+        
         intentos++;
 
         // Mostrar el número de intentos en el span
@@ -96,9 +103,35 @@ $(document).ready(function () {
     // Al hacer clic en "Guardar en Ranking"
     $("#guardarRanking").click(function () {
         const nombre = $("#nombreJugador").val();
+
+        // Verificar si se ingresó un nombre
         if (nombre) {
-            ranking.push({ "jugador": nombre, "intentos": intentos });
-            mostrarRanking(ranking);
+            // Realizar el POST para agregar el nuevo jugador
+            $.ajax({
+                url: `https://my-json-server.typicode.com/AlbertoNoriegaArena/proyectoGrupoFinal/solicitudes`,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    jugador: nombre,
+                    intentos: intentos
+                }),
+                success: function (response) {
+                    console.log('Jugador agregado al ranking:', response);
+
+                    // Añadir el nuevo jugador al ranking en memoria
+                    ranking.push(response);
+
+                    // Ordenar el ranking después de agregar al jugador
+                    ranking.sort((a, b) => a.intentos - b.intentos);
+
+                    // Mostrar el ranking actualizado, sin borrar el ranking existente
+                    mostrarRanking(ranking);
+                },
+                error: function (error) {
+                    console.error('Error al agregar al ranking:', error);
+                }
+            });
+
             // Limpiar el campo de nombre y ocultar el formulario
             $("#FormularioNombreJugador").hide();
             $("#nombreJugador").val(''); // Limpiar el campo de entrada del nombre
@@ -108,6 +141,9 @@ $(document).ready(function () {
             intentos = 0;
             $(".numeroDeIntentos").text(intentos);
             $("#numero").val(''); // Limpiar el campo de entrada
+            // Vaciar el array de números intentados
+            numerosIntentados.length = 0;
+            // Actualizar el contenido de .numerosProbados para reflejar el cambio
             $(".intentos p.numerosProbados").text('');
         } else {
             alert("Por favor, ingresa tu nombre.");
