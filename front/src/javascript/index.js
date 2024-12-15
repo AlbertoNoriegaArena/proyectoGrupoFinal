@@ -70,36 +70,46 @@ $(document).ready(function () {
     let numerosIntentados = []; // Array para almacenar los números intentados
 
     // Evento al enviar el formulario
-    $("#formularioNumero").submit(function (event) {
-        event.preventDefault();  // Evitar el envío del formulario
+$("#formularioNumero").submit(function (event) {
+    event.preventDefault();  // Evitar el envío del formulario
 
-        // Obtener el número introducido por el usuario 
-        let numeroIngresado = parseInt($("#numero").val());
-        
-        intentos++;
+    // Obtener el número ingresado por el usuario y asegurarnos de que sea un número
+    let numeroIngresado = parseInt($("#numero").val());
 
-        // Mostrar el número de intentos en el span
-        $(".numeroDeIntentos").text(intentos);
+    // Aumentar el contador de intentos
+    intentos++;
 
-        // Mostrar los números intentados en el div .intentos
-        numerosIntentados.push(numeroIngresado);
-        let intentosTexto = "Números intentados: " + numerosIntentados.join(", ");
-        $(".intentos p.numerosProbados").text(intentosTexto);
+    // Mostrar el número de intentos en el span
+    $(".numeroDeIntentos").text(intentos);
 
-        // Verificar si el número ingresado es correcto
-        if (numeroIngresado === numeroAleatorio) {
-            // Mostrar el formulario para ingresar el nombre
-            $("#FormularioNombreJugador").show();
+    // Mostrar los números intentados en el div .intentos
+    numerosIntentados.push(numeroIngresado);
+    let intentosTexto = "Números intentados: " + numerosIntentados.join(", ");
+    $(".intentos p.numerosProbados").text(intentosTexto);
 
-        } else if (numeroIngresado < numeroAleatorio) {
-            alert("El número que buscas es mayor que " + numeroIngresado);
-            $("#numero").val(''); // Limpiar el campo de entrada
-        } else {
-            alert("El número que buscas es menor que " + numeroIngresado);
-            $("#numero").val(''); // Limpiar el campo de entrada
-        }
-    });
+    // Verificar si el número ingresado es correcto
+    if (numeroIngresado === numeroAleatorio) {
+        // Mostrar el formulario para ingresar el nombre
+        $("#FormularioNombreJugador").show();
 
+    } else if (numeroIngresado < numeroAleatorio) {
+        Swal.fire({
+            // icon: 'info',
+            // title: '¡Intenta de nuevo!',
+            text: "El número que buscas es mayor que " + numeroIngresado,
+            confirmButtonText: 'Aceptar'
+        });
+        $("#numero").val(''); // Limpiar el campo de entrada
+    } else {
+        Swal.fire({
+            // icon: 'info',
+            // title: '¡Intenta de nuevo!',
+            text: "El número que buscas es menor que " + numeroIngresado,
+            confirmButtonText: 'Aceptar'
+        });
+        $("#numero").val(''); // Limpiar el campo de entrada
+    }
+});
     // Al hacer clic en "Guardar en Ranking"
     $("#guardarRanking").click(function () {
         const nombre = $("#nombreJugador").val();
@@ -146,7 +156,12 @@ $(document).ready(function () {
             // Actualizar el contenido de .numerosProbados para reflejar el cambio
             $(".intentos p.numerosProbados").text('');
         } else {
-            alert("Por favor, ingresa tu nombre.");
+            Swal.fire({
+                icon: 'warning',
+                // title: '¡Intenta de nuevo!',
+                text: "Por favor, introduce un nombre",
+                confirmButtonText: 'Aceptar'
+            });
         }
     });
 });
