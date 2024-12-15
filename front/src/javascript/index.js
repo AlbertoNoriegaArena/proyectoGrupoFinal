@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    // Limpiar el campo de número al cargar la página
+    $("#numero").val('');
+
     let ranking = []; // Inicializar el ranking como un array vacío
 
     // Función para cargar los datos 
