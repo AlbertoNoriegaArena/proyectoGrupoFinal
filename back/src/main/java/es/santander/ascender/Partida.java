@@ -20,29 +20,20 @@ public class Partida {
         System.out.println("¡Introduce el número de jugadores! Mínimo 1 y máximo de 5");
         int numeroDeJugadores = 0;
     
-        // Validaciones número de jugadores
-        while (true) {
-            try {
-                numeroDeJugadores = scanner.nextInt();
-                scanner.nextLine(); // Limpiar buffer
-                // Comprobamos que el número de jugadores sea mayor que 0
-                if (numeroDeJugadores <= 0) {
-                    System.out.println("Debe haber al menos un jugador. Inténtalo de nuevo.");
-                } else if (numeroDeJugadores > 5) {
-                    System.out.println("No se permiten más de 5 jugadores. Inténtalo de nuevo.");
-                } else {
-                    break;
-                }
-            } catch (InputMismatchException e) {
-                // Excepción si no se introduce un número entero
-                System.out.println("Debes introducir un número entero.");
-                scanner.nextLine(); // Limpiar buffer
-            }
-        }
+        // Validamos número de jugadores
+        numeroDeJugadores = validarNumeroJugadores(scanner, numeroDeJugadores);
     
         List<Jugador> jugadores = new ArrayList<>();
     
         // Jugar para cada jugador
+        jugarPartida(scanner, numeroDeJugadores, jugadores);
+    
+        scanner.close(); // Cerrar el Scanner 
+
+        return jugadores;
+    }
+
+    private void jugarPartida(Scanner scanner, int numeroDeJugadores, List<Jugador> jugadores) {
         for (int i = 1; i <= numeroDeJugadores; i++) {
             System.out.println("\nTurno del jugador " + i + ":");
     
@@ -103,9 +94,27 @@ public class Partida {
             // Crear un nuevo jugador y agregarlo a la lista
             jugadores.add(new Jugador(nombre, contadorIntentos));
         }
-    
-        scanner.close(); // Cerrar el Scanner para liberar recursos
+    }
 
-        return jugadores;
+    private int validarNumeroJugadores(Scanner scanner, int numeroDeJugadores) {
+        while (true) {
+            try {
+                numeroDeJugadores = scanner.nextInt();
+                scanner.nextLine(); // Limpiar buffer
+                // Comprobamos que el número de jugadores sea mayor que 0
+                if (numeroDeJugadores <= 0) {
+                    System.out.println("Debe haber al menos un jugador. Inténtalo de nuevo.");
+                } else if (numeroDeJugadores > 5) {
+                    System.out.println("No se permiten más de 5 jugadores. Inténtalo de nuevo.");
+                } else {
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                // Excepción si no se introduce un número entero
+                System.out.println("Debes introducir un número entero.");
+                scanner.nextLine(); // Limpiar buffer
+            }
+        }
+        return numeroDeJugadores;
     }
 }

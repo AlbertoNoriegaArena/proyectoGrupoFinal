@@ -29,13 +29,13 @@ public class GestorFicheroTest {
         // Leer el fichero y verificar que los datos se han guardado correctamente
         List<Jugador> jugadoresCargados = gestorFichero.cargarJugadores();
 
-        assertEquals(12, jugadoresCargados.size());
+        assertEquals(3, jugadoresCargados.size());
         assertEquals("Juan", jugadoresCargados.get(0).getNombre());
-        assertEquals(3, jugadoresCargados.get(0).getNumeroDeIntentos());
+        assertEquals(98, jugadoresCargados.get(0).getNumeroDeIntentos());
         assertEquals("Ana", jugadoresCargados.get(1).getNombre());
-        assertEquals(5, jugadoresCargados.get(1).getNumeroDeIntentos());
+        assertEquals(97, jugadoresCargados.get(1).getNumeroDeIntentos());
         assertEquals("Luis", jugadoresCargados.get(2).getNombre());
-        assertEquals(7, jugadoresCargados.get(2).getNumeroDeIntentos());
+        assertEquals(96, jugadoresCargados.get(2).getNumeroDeIntentos());
     }
 
     @Test
@@ -49,26 +49,33 @@ public void testGuardarTop5() {
         new Jugador("Juan", 5),
         new Jugador("Pepita", 1),
         new Jugador("Ana", 8),
-        new Jugador("Juliana", 2)
+        new Jugador("Juliana", 2),
+        new Jugador("Cándido", 98),
+        new Jugador("Feliciana", 52)
+        
     );
 
     // Guardar el top 5 de jugadores
     gestorFicheroTop5.guardarTop5(top5Jugadores);
 
-    // Leer el fichero de top 5 y verificar
+    // Leer el fichero de top 5 y verificar. 
     List<Jugador> jugadoresCargadosTop5 = gestorFicheroTop5.cargarJugadores();
 
-    assertEquals(5, jugadoresCargadosTop5.size());
-    assertEquals("Pepita", jugadoresCargadosTop5.get(0).getNombre());
-    assertEquals(1, jugadoresCargadosTop5.get(0).getNumeroDeIntentos());
-    assertEquals("Juliana", jugadoresCargadosTop5.get(1).getNombre());
-    assertEquals(2, jugadoresCargadosTop5.get(1).getNumeroDeIntentos());
-    assertEquals("Luis", jugadoresCargadosTop5.get(2).getNombre());
-    assertEquals(3, jugadoresCargadosTop5.get(2).getNumeroDeIntentos());
-    assertEquals("Juan", jugadoresCargadosTop5.get(3).getNombre());
-    assertEquals(5, jugadoresCargadosTop5.get(3).getNumeroDeIntentos());
-    assertEquals("Ana", jugadoresCargadosTop5.get(4).getNombre());
-    assertEquals(8, jugadoresCargadosTop5.get(4).getNumeroDeIntentos());
+    assertEquals(7, jugadoresCargadosTop5.size());
+    assertEquals("Luis", jugadoresCargadosTop5.get(0).getNombre());
+    assertEquals(3, jugadoresCargadosTop5.get(0).getNumeroDeIntentos());
+    assertEquals("Juan", jugadoresCargadosTop5.get(1).getNombre());
+    assertEquals(5, jugadoresCargadosTop5.get(1).getNumeroDeIntentos());
+    assertEquals("Pepita", jugadoresCargadosTop5.get(2).getNombre());
+    assertEquals(1, jugadoresCargadosTop5.get(2).getNumeroDeIntentos());
+    assertEquals("Ana", jugadoresCargadosTop5.get(3).getNombre());
+    assertEquals(8, jugadoresCargadosTop5.get(3).getNumeroDeIntentos());
+    assertEquals("Juliana", jugadoresCargadosTop5.get(4).getNombre());
+    assertEquals(2, jugadoresCargadosTop5.get(4).getNumeroDeIntentos());
+    assertEquals("Cándido", jugadoresCargadosTop5.get(5).getNombre());
+    assertEquals(98, jugadoresCargadosTop5.get(5).getNumeroDeIntentos());
+    assertEquals("Feliciana", jugadoresCargadosTop5.get(6).getNombre());
+    assertEquals(52, jugadoresCargadosTop5.get(6).getNumeroDeIntentos());
 }
 
     @Test

@@ -1,3 +1,0 @@
-Juan,3
-Ana,5
-Luis,7
