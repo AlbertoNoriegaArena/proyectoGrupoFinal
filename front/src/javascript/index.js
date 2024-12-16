@@ -114,6 +114,7 @@ $("#formularioNumero").submit(function (event) {
     }
 });
     // Al hacer clic en "Guardar en Ranking"
+
     $("#guardarRanking").click(function () {
         const nombre = $("#nombreJugador").val();
 
@@ -131,6 +132,13 @@ $("#formularioNumero").submit(function (event) {
                 success: function (response) {
                     console.log('Jugador agregado al ranking:', response);
 
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Tu nombre pasará a los anales de la historia',
+                        text: 'Pero para mejorar ¡Tienes que volverlo a intentar!',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    
                     // Añadir el nuevo jugador al ranking en memoria
                     ranking.push(response);
 
@@ -149,6 +157,7 @@ $("#formularioNumero").submit(function (event) {
             $("#FormularioNombreJugador").hide();
             $("#nombreJugador").val(''); // Limpiar el campo de entrada del nombre
 
+            
             // Reiniciar el juego (número aleatorio y contador de intentos)
             numeroAleatorio = Math.floor(Math.random() * 100) + 1;
             intentos = 0;
