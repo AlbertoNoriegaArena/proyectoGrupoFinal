@@ -1,6 +1,8 @@
 package es.santander.ascender;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.util.List;
@@ -10,6 +12,21 @@ public class GestorFicheroTest {
     // Ruta temporal para archivos de prueba
     private final String rutaFichero = "test_jugadores.txt";
     private final String rutaFicheroTop5 = "test_top5jugadores.txt";
+
+
+    @BeforeEach
+    public void limpiarFichero() {
+        // Eliminar los archivos de prueba antes de cada ejecución del test
+        File archivoJugadores = new File(rutaFichero);
+        if (archivoJugadores.exists()) {
+            archivoJugadores.delete();
+        }
+        
+        File archivoTop5 = new File(rutaFicheroTop5);
+        if (archivoTop5.exists()) {
+            archivoTop5.delete();
+        }
+    }
 
     @Test
     public void testGuardarJugadores() {
@@ -87,6 +104,7 @@ public void testGuardarTop5() {
             writer.write("Ana,5");
             writer.newLine();
             writer.write("Luis,7");
+            writer.newLine();
         }
 
         // Crear un gestor de fichero y cargar los jugadores
