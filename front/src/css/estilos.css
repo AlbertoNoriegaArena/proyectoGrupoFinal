@@ -2,6 +2,14 @@ header{
     text-align: center;
 }
 
+body {
+    background-image: url('../images/Fondo2.jpg'); 
+    background-size: cover;  
+    background-position: center;  
+    background-attachment: fixed;  
+    background-repeat: no-repeat;  
+}
+
 .fila-primero {
     background-color: gold ;
     padding: 20px 0;
