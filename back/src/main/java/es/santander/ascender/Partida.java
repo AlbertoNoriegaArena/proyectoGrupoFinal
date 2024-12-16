@@ -10,8 +10,8 @@ public class Partida {
     private int numeroSecreto;
 
     private int generarNumeroSecreto() {
-        //TODO cambiar a 100 el random de numero secreto para la entrega final
-        numeroSecreto = new Random().nextInt(10); 
+        
+        numeroSecreto = new Random().nextInt(101); 
         return numeroSecreto;
     }
 
